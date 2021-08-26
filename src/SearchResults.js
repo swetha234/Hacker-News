@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import { setSearchValue, fetchData } from './actions/simpleAction';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import './App.css';
 
 class SearchResults extends Component {
@@ -17,16 +17,12 @@ class SearchResults extends Component {
 		const query = this.props.searchvalue;
 		this.props.fetchData(query);
 	};
-	displaySearchHistory =  event => {
-		
-	}
 
 	render() {
 		return (
 			<div>
 				<div className='class1'>
-					<h1>HACKER NEWS</h1>
-					<h3>The most readable results on the web...!!!</h3>
+				
 				</div>
 				<div className='class2'>
 					<p
@@ -37,7 +33,34 @@ class SearchResults extends Component {
 						}}
 					>
 					</p>
-					{this.props.results && <SearchResults data={this.props.results} />}
+          
+					{/* {this.props.results && <SearchResults data={this.props.results} />} */}
+          <div>
+      {props.data.hits && props.data.hits.length ? (
+        <ol>
+          <p style={{ fontFamily: 'Italic', fontSize: '20px' }}>
+            Here are the related links for your search
+          </p>
+          {props.data.hits.map((hit, index) => {
+            return (
+              <li key={index} style={{ margin: '15px 0' }}>
+                <div>Title: {hit.title}</div>
+                <a
+                  href={hit.url}
+                  style={{ color: ' #blue ', alignItems: 'center' }}
+                  target='_blank' 
+                  rel="noopener noreferrer"
+                >
+                  Open Link
+                </a>
+              </li>
+            );
+          })}
+        </ol>
+      ) : (
+        'No results found'
+      )}
+    </div>
 				</div>
 			</div>
 			
@@ -57,39 +80,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-export default SearchResults;
-
-
+export default connect(mapStateToProps, mapDispatchToProps)(SearchResults);
 
 // import React from 'react';
 
-// export const SearchResults = props => {
-//   return (
-//     <div>
-//       {props.data.hits && props.data.hits.length ? (
-//         <ol>
-//           <p style={{ fontFamily: 'Italic', fontSize: '20px' }}>
-//             Here are the related links for your search
-//           </p>
-//           {props.data.hits.map((hit, index) => {
-//             return (
-//               <li key={index} style={{ margin: '15px 0' }}>
-//                 <div>Title: {hit.title}</div>
-//                 <a
-//                   href={hit.url}
-//                   style={{ color: ' #blue ', alignItems: 'center' }}
-//                   target='_blank' 
-//                   rel="noopener noreferrer"
-//                 >
-//                   Open Link
-//                 </a>
-//               </li>
-//             );
-//           })}
-//         </ol>
-//       ) : (
-//         'No results found'
-//       )}
-//     </div>
-//   );
-// };
