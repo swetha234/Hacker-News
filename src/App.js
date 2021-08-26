@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setSearchValue, fetchData } from './actions/simpleAction';
 import './App.css';
-import { SearchResults } from './SearchResults';
+import  SearchResults  from './SearchResults';
+import { History } from './History';
+
+
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -16,10 +20,16 @@ class App extends Component {
 		const query = this.props.searchvalue;
 		this.props.fetchData(query);
 	};
+	displaySearchHistory =  event => {
+		
+	}
 
 	render() {
 		return (
+			
 			<div style={container}>
+				<BrowserRouter>
+
 				<div className='class1' style={headerStyle}>
 					<h1>HACKER NEWS</h1>
 					<h3>The most readable results on the web...!!!</h3>
@@ -30,8 +40,11 @@ class App extends Component {
 						placeholder='Search stories....'
 					></input>
 					<div>
-						<button style={buttonStyle} onClick={this.searchHackernews}>
-							Search{' '}
+						<button style={buttonStyle} onClick={this.searchHackernews}><Link to="/search">
+							Search{' '}</Link>
+						</button>{' '}
+						<button style={buttonStyle} onClick={this.displaySearchHistory}>
+							<Link to="/history">History{' '}</Link>
 						</button>{' '}
 					</div>
 				</div>
@@ -44,15 +57,33 @@ class App extends Component {
 							marginLeft: '20px'
 						}}
 					>
-						Search Results...
 					</p>
 
 					{this.props.results && <SearchResults data={this.props.results} />}
+					{this.props.searchvalue && <History data={this.props.searchvalue} />}
 				</div>
+				<Switch>
+          			<Route path="/search">
+            			<SearchResults />
+          			</Route>
+          			<Route path="/histoy">
+            			<History />
+          			</Route>
+         
+        		</Switch>
+				</BrowserRouter>
 			</div>
+			
 		);
 	}
 }
+// ReactDOM.render(
+// 	<BrowserRouter>
+// 	  <App />
+// 	</BrowserRouter>,
+// 	document.getElementById("root")
+//   );
+
 const mapStateToProps = state => ({
 	searchvalue: state.simpleReducer.searchvalue,
 	results: state.simpleReducer.results
@@ -64,7 +95,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 //Styling
-
 const headerStyle = {
 	background: '#333',
 	color: '#fff',
