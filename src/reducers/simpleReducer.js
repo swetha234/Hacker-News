@@ -1,4 +1,4 @@
-export default (state = {}, action) => {
+export default (state = {history:[]}, action) => {
   console.log(state, action);
   switch (action.type) {
     case 'SET_SEARCH_VALUE':
@@ -11,7 +11,13 @@ export default (state = {}, action) => {
         ...state,
         results: action.payload
       };
+    case 'SAVE_HISTORY_VALUE':
+      return{
+        ...state,
+        history: [...state.history, action.payload]
+      }
     default:
       return state;
   }
+
 };

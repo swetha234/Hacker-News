@@ -1,5 +1,3 @@
-// import { render } from '@testing-library/react';
-
 export const setSearchValue = value => {
 	return {
 		type: 'SET_SEARCH_VALUE',
@@ -17,3 +15,11 @@ export const fetchData = value => dispatch => {
 			});
 		});
 };
+
+export const saveHistory = value => {
+	console.log(value);
+	return{
+		type: 'SAVE_HISTORY_VALUE',
+		payload: value
+	}
+}
