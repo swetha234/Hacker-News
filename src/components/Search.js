@@ -1,33 +1,12 @@
 import React from "react";
-import { setSearchValue, fetchData, saveHistory } from "../actions/simpleAction";
+import {
+  setSearchValue,
+  fetchData,
+  saveHistory,
+} from "../actions/simpleAction";
+import { Link } from "react-router-dom";
 import SearchResults from "./SearchResults";
 import { useDispatch, useSelector } from "react-redux";
-
-//Styling
-const headerStyle = {
-  background: "#333",
-  color: "#fff",
-  textAlign: "center",
-  padding: "70px",
-  fontFamily: "Helvetica",
-  size: "35",
-};
-const boxStyle = {
-  width: "40%",
-  height: "30px",
-  borderRadius: "20px 20px",
-  fontFamily: "Helvetica",
-  fontSize: "20px",
-};
-
-const buttonStyle = {
-  marginTop: "30px",
-  height: "30px",
-  width: "8%",
-  borderRadius: "20px 20px",
-  fontSize: "15px",
-  fontFamily: "Helvetica",
-};
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -56,7 +35,20 @@ const Search = () => {
         ></input>
         <div>
           <button style={buttonStyle} onClick={searchHackernews}>
-            Search
+          <Link
+              to="/search"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              Search
+            </Link>
+          </button>{" "}
+          <button style={buttonStyle}>
+            <Link
+              to="/history"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              History
+            </Link>
           </button>
         </div>
       </div>
@@ -74,6 +66,34 @@ const Search = () => {
       </div>
     </>
   );
+};
+
+
+//Styling
+const headerStyle = {
+  background: "#333",
+  color: "#fff",
+  textAlign: "center",
+  padding: "70px",
+  fontFamily: "Helvetica",
+  size: "35",
+};
+const boxStyle = {
+  width: "40%",
+  height: "30px",
+  borderRadius: "20px 20px",
+  fontFamily: "Helvetica",
+  fontSize: "20px",
+};
+
+const buttonStyle = {
+  marginTop: "30px",
+  height: "30px",
+  width: "8%",
+  cursor: "pointer",
+  borderRadius: "20px 20px",
+  fontSize: "15px",
+  fontFamily: "Helvetica",
 };
 
 export default Search;

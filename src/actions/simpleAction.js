@@ -17,7 +17,6 @@ export const fetchData = value => dispatch => {
 };
 
 export const saveHistory = value => {
-	console.log(value);
 	return{
 		type: 'SAVE_HISTORY_VALUE',
 		payload: value

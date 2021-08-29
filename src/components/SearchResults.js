@@ -17,7 +17,7 @@ const SearchResults = ({ data }) => {
           {data.hits && data.hits.length ? (
             <ol>
               <p style={{ fontFamily: "Italic", fontSize: "20px" }}>
-                Here are the related links for your search
+                Here are the related search results
               </p>
               {data.hits.map((hit, index) => {
                 return (

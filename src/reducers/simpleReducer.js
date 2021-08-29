@@ -13,7 +13,6 @@ export default (state = {history:[]}, action) => {
       };
     case 'SAVE_HISTORY_VALUE':
       return{
-        ...state,
         history: [...state.history, action.payload]
       }
     default:
